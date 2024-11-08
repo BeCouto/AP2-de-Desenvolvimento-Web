@@ -1,0 +1,29 @@
+/* Container principal */
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #000; /* Fundo preto para representar as cores do Botafogo */
+    padding: 1rem;
+}
+
+/* Estilo dos artigos dentro do container */
+#container > article {
+    width: 10rem;
+    border: 1px solid #ffffff; /* Borda branca */
+    border-radius: 5px;
+    margin: 0.5rem;
+    padding: 0.3rem;
+    background-color: #1a1a1a; /* Fundo cinza escuro para contraste */
+    color: #ffffff; /* Texto branco */
+    text-align: center;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Sombra leve para destaque */
+}
+
+/* Ajuste das imagens dentro do artigo */
+#container article img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
