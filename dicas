@@ -1,6 +1,0 @@
-container.innerHTML += `
-        <article>
-        <h1>${atleta.nome}</h1>
-        <img src ='${atleta.imagem}'>
-        <p>${atleta.detalhes}</p>
-        </article> `
