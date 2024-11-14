@@ -60,7 +60,7 @@ console.log("isso imprime primeiro.");
 
 const manipulaBotao = (e) => {
     const texto = document.getElementById('senha').value;
-    if (hex_md5(texto) ==='e0e9f295675cf4f4d18ef9766ffe6d0e'){
+    if (hex_md5(texto) ==='8e618839cadb8df56f391402dfb10fe8273c20207a413c5034130be27bb63b7c'){
         sessionStorage.setItem('logado', 'sim');
     } else {
         alert('Você errou a senha!!!');
