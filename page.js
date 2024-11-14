@@ -11,7 +11,6 @@ function toggleDropdown() {
     dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
 }
 
-
 // Botão de logout
 logout.addEventListener("click", function() {
     home.classList.remove("active");

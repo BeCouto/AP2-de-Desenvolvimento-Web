@@ -4,9 +4,11 @@ const url = "https://botafogo-atletas.mange.li/2024-1/";
 const Login = () => {
     const senha = document.getElementById("senha").value;
     // Verificação de hash SHA-256 da senha
-    if (hex_sha256(senha) === "ce855f48b7422de36b50512a9a0a06a59d4f2f6efac6f439456777a396773cc1") {
+    if (hex_sha256(senha) === "8e618839cadb8df56f391402dfb10fe8273c20207a413c5034130be27bb63b7c") {
         sessionStorage.setItem("logado", "sim"); // Armazena estado de login
-        window.location.href = "detalhes.html"; // Redireciona para a página de detalhes
+        telaLogin.classList.remove("active");
+        home.classList.add("active");
+
     } else {
         alert("Senha incorreta!"); // Exibe mensagem de erro
     }
@@ -80,16 +82,6 @@ pega_json(`${url}masculino`).then((atletas) => {
 
 // Exemplo de requisição adicional
 pega_json(`${url}26`).then((res) => console.log(res));
-
-// Função auxiliar de verificação para o botão de autenticação (usando SHA-256)
-const manipulaBotao = () => {
-    const texto = document.getElementById("senha").value;
-    if (hex_sha256(texto) === '8e618839cadb8df56f391402dfb10fe8273c20207a413c5034130be27bb63b7c') {
-        sessionStorage.setItem("logado", "sim");
-    } else {
-        alert("Você errou a senha!");
-    }
-};
 
 // Conecta a função de autenticação ao botão
 document.getElementById("botao").onclick = manipulaBotao;
