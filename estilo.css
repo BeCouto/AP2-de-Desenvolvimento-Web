@@ -1,24 +1,31 @@
-/* Container principal */
+/* Fontes e estilo básico */
+* {
+    font-family: 'Noto Sans Japanese', cursive;
+    font-weight: bold;
+}
+
+/* Container principal dos atletas */
 #container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     background-color: #000; /* Fundo preto para representar as cores do Botafogo */
     padding: 1rem;
+    max-width: 1400px; /* Largura máxima */
+    margin: 0 auto; /* Centraliza na tela */
 }
 
 /* Estilo dos artigos dentro do container */
 #container > article {
     width: 10rem;
-    border: 1px solid #ffffff; /* Borda branca */
+    border: 1px solid #ffffff;
     border-radius: 5px;
     margin: 0.5rem;
     padding: 0.3rem;
-    background-color: #1a1a1a; /* Fundo cinza escuro para contraste */
-    color: #ffffff; /* Texto branco */
+    background-color: #1a1a1a;
+    color: #ffffff;
     text-align: center;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); /* Sombra leve para destaque */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 /* Ajuste das imagens dentro do artigo */
@@ -26,4 +33,110 @@
     width: 100%;
     border-radius: 5px;
     margin-bottom: 0.5rem;
+}
+
+/* Layout básico da tela de login e home */
+#tela-login, #home {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#tela-login.active, #home.active {
+    display: block;
+}
+
+/* Dropdown para filtro */
+#dropdown-filtro {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content button {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 12px 16px;
+    text-align: left;
+    border: none;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+
+.dropdown-content button:hover {
+    background-color: #ddd;
+}
+
+/* Responsividade */
+
+/* Viewport até 768px: layout vertical, uma coluna */
+@media (max-width: 768px) {
+    /* Página de Login */
+    #tela-login, #home {
+        margin-top: 10px;
+        padding: 0 20px;
+    }
+
+    /* Container de atletas com uma coluna */
+    #container {
+        flex-direction: column;
+        align-items: center;
+    }
+    #container > article {
+        width: 100%;
+    }
+
+    /* Seleção de elenco com select em viewports menores */
+    #dropdown-filtro {
+        display: none;
+    }
+    #select-filtro {
+        display: block;
+        width: 100%;
+        margin: 1rem auto;
+    }
+}
+
+/* Viewport até 1024px: layout com três colunas */
+@media (min-width: 769px) and (max-width: 1024px) {
+    #container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    /* Seleção de elenco com botões para filtros */
+    #select-filtro {
+        display: none;
+    }
+    #dropdown-filtro {
+        display: inline-block;
+    }
+}
+
+/* Viewport até 1300px: layout com quatro colunas */
+@media (min-width: 1025px) and (max-width: 1300px) {
+    #container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* Viewport acima de 1300px: layout com cinco colunas */
+@media (min-width: 1301px) {
+    #container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
+    }
 }

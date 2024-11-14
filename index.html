@@ -1,21 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="escudo.png" sizes="16x16">
     <title>Atletas Botafogo</title>
     <link rel="stylesheet" href="estilo.css">
-    <script src="feminino.js"></script>
-    <script src ="md5-min.js"></script>
+    <script src="md5-min.js"></script>
     <script src="code.js" defer></script>
+
 </head>
 <body>
-    <input type="password" id="senha">
-    <button id="botao">tentar</button>
-    <button id="logout">logout</button>
-    <div id="container">
-
+    <!-- Tela de Login -->
+    <div id="tela-login" class="active">
+        <h1>Acesso ao elenco do Botafogo</h1>
+        <input type="password" id="senha" placeholder="Digite a senha">
+        <button id="botao">Tentar</button>
+        <div><small>A senha é: Botafogo</small></div>
     </div>
+
+    <!-- Página Principal -->
+    <div id="home" class="hidden">
+        <div id="grid-topo">
+            <h1 id="home-topo">Elenco Botafogo 2024/1</h1>
+            <button id="logout">Logout</button>
+        </div>
+
+        <!-- Dropdown para filtros -->
+        <div id="grid-opcoes">
+            <div id="dropdown-filtro">
+                <button onclick="toggleDropdown()">Filtrar Jogadores</button>
+                <div class="dropdown-content" id="dropdownContent">
+                    <button id="todos">Todos</button>
+                    <button id="masculino">Masculino</button>
+                    <button id="feminino">Feminino</button>
+                </div>
+            </div>
+        </div>
+
+        <input type="text" id="caixa-texto" placeholder="Pesquisar atleta..."/>
+        <div id="container"></div>
+    </div>
+
+    <!-- Importando o JavaScript -->
+    <script src="code.js"></script>
+</body>
+</html>
+    <script>
+        // Seleciona elementos do DOM
+        const senhaInput = document.getElementById("senha");
+        const botao = document.getElementById("botao");
+        const logout = document.getElementById("logout");
+        const telaLogin = document.getElementById("tela-login");
+        const home = document.getElementById("home");
+        const dropdownContent = document.getElementById("dropdownContent");
+
+        // Função para mostrar ou esconder o dropdown
+        function toggleDropdown() {
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Autenticação simples com verificação de senha
+        botao.addEventListener("click", function() {
+            const senha = senhaInput.value;
+            if (senha === "Botafogo") {
+                telaLogin.classList.remove("active");
+                home.classList.add("active");
+                alert("Acesso permitido!");
+            } else {
+                alert("Senha incorreta! Tente novamente.");
+                senhaInput.value = "";
+            }
+        });
+
+        // Botão de logout
+        logout.addEventListener("click", function() {
+            home.classList.remove("active");
+            telaLogin.classList.add("active");
+            senhaInput.value = ""; // Limpa a senha
+        });
+
+        // Fecha o dropdown quando clicar fora dele
+        window.onclick = function(event) {
+            if (!event.target.matches('#dropdown-filtro button')) {
+                dropdownContent.style.display = 'none';
+            }
+        };
+
+        // Filtragem dos jogadores (exemplo)
+        document.getElementById("todos").addEventListener("click", function() {
+            alert("Mostrando todos os jogadores.");
+            dropdownContent.style.display = 'none';
+        });
+
+        document.getElementById("masculino").addEventListener("click", function() {
+            alert("Mostrando jogadores masculinos.");
+            dropdownContent.style.display = 'none';
+        });
+
+        document.getElementById("feminino").addEventListener("click", function() {
+            alert("Mostrando jogadoras femininas.");
+            dropdownContent.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
