@@ -4,37 +4,6 @@
     font-weight: bold;
 }
 
-/* Container principal dos atletas */
-#container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: #000; /* Fundo preto para representar as cores do Botafogo */
-    padding: 1rem;
-    max-width: 1400px; /* Largura máxima */
-    margin: 0 auto; /* Centraliza na tela */
-}
-
-/* Estilo dos artigos dentro do container */
-#container > article {
-    width: 10rem;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    margin: 0.5rem;
-    padding: 0.3rem;
-    background-color: #1a1a1a;
-    color: #ffffff;
-    text-align: center;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-}
-
-/* Ajuste das imagens dentro do artigo */
-#container article img {
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 0.5rem;
-}
-
 /* Layout básico da tela de login e home */
 #tela-login, #home {
     display: none;
@@ -106,37 +75,74 @@
     }
 }
 
-/* Viewport até 1024px: layout com três colunas */
-@media (min-width: 769px) and (max-width: 1024px) {
-    #container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-    }
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    padding: 0 10px;
+    gap: 1rem; /* Espaçamento entre os itens */
+}
 
-    /* Seleção de elenco com botões para filtros */
-    #select-filtro {
-        display: none;
-    }
-    #dropdown-filtro {
-        display: inline-block;
+/* Estilo dos artigos dentro do container */
+#container > article {
+    width: 20rem;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 1rem;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+#container h1 {
+    font-size: 1.2rem;
+    color: black;
+    margin: 0.5rem 0;
+}
+
+#container p {
+    padding: 0 1rem 1rem;
+    color: #555;
+}
+
+#container img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Layout Responsivo */
+
+/* Viewport até 768px: layout com uma coluna */
+@media (max-width: 768px) {
+    #container > article {
+        width: 100%;
     }
 }
 
-/* Viewport até 1300px: layout com quatro colunas */
-@media (min-width: 1025px) and (max-width: 1300px) {
+/* Viewport de 769px a 1024px: layout com três colunas */
+@media (min-width: 769px) and (max-width: 1024px) {
     #container {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+        justify-content: space-around;
+    }
+
+    #container > article {
+        width: 30%; /* Ajuste para 3 colunas */
+    }
+}
+
+/* Viewport de 1025px a 1300px: layout com quatro colunas */
+@media (min-width: 1025px) and (max-width: 1300px) {
+    #container > article {
+        width: 23%; /* Ajuste para 4 colunas */
     }
 }
 
 /* Viewport acima de 1300px: layout com cinco colunas */
 @media (min-width: 1301px) {
-    #container {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 1rem;
+    #container > article {
+        width: 18%; /* Ajuste para 5 colunas */
     }
 }

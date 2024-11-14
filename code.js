@@ -1,30 +1,51 @@
 const url = "https://botafogo-atletas.mange.li/2024-1/";
 
+// Função de login com verificação de senha hash e redirecionamento
+const Login = () => {
+    const senha = document.getElementById("senha").value;
+    // Verificação de hash SHA-256 da senha
+    if (hex_sha256(senha) === "ce855f48b7422de36b50512a9a0a06a59d4f2f6efac6f439456777a396773cc1") {
+        sessionStorage.setItem("logado", "sim"); // Armazena estado de login
+        window.location.href = "detalhes.html"; // Redireciona para a página de detalhes
+    } else {
+        alert("Senha incorreta!"); // Exibe mensagem de erro
+    }
+};
+
+// Associa a função de login ao botão
+document.getElementById("botao").onclick = Login;
+
+// Função de logout que limpa o estado de autenticação da sessionStorage
+document.getElementById("logout").onclick = () => {
+    sessionStorage.removeItem("logado"); // Remove o estado de login
+    alert("Você saiu da sessão.");
+};
+
+// Função para buscar dados do JSON
 const pega_json = async (caminho) => {
     const resposta = await fetch(caminho);
     const dados = await resposta.json();
     return dados;
 };
 
-const container = document.getElementById("container");
-
+// Manipulação de clique para redirecionar e armazenar dados de atleta
 const manipulaClick = (e) => {
     const id = e.currentTarget.dataset.id;
     const url = `detalhes.html?id=${id}`;
 
-    // Cookies com path e SameSite
+    // Armazenamento de cookies com path e SameSite
     document.cookie = `id=${id}; path=/; SameSite=Strict`;
     document.cookie = `altura=${e.currentTarget.dataset.altura}; path=/; SameSite=Strict`;
 
-    // localStorage
-    localStorage.setItem('id', id);
-    localStorage.setItem('dados', JSON.stringify(e.currentTarget.dataset));
-    //sessionStorage
-    sessionStorage.setItem('dados', JSON.stringify(e.currentTarget.dataset))
+    // Armazenamento em localStorage e sessionStorage
+    localStorage.setItem("id", id);
+    localStorage.setItem("dados", JSON.stringify(e.currentTarget.dataset));
+    sessionStorage.setItem("dados", JSON.stringify(e.currentTarget.dataset));
 
-    window.location = url;
+    window.location = url; // Redireciona para a página de detalhes
 };
 
+// Função para montar os cards dos atletas
 const montaCard = (atleta) => {
     const cartao = document.createElement("article");
     const nome = document.createElement("h1");
@@ -41,8 +62,9 @@ const montaCard = (atleta) => {
     descri.innerHTML = atleta.detalhes;
     cartao.appendChild(descri);
 
-    cartao.onclick = manipulaClick; 
+    cartao.onclick = manipulaClick;
 
+    // Dados adicionais nos atributos data
     cartao.dataset.id = atleta.id;
     cartao.dataset.nJogos = atleta.n_jogos;
     cartao.dataset.altura = atleta.altura;
@@ -50,23 +72,24 @@ const montaCard = (atleta) => {
     return cartao;
 };
 
-pega_json(`${url}masculino`).then((r) => {
-    r.forEach((ele) => container.appendChild(montaCard(ele)));
+// Carrega os atletas masculinos e os exibe no container
+const container = document.getElementById("container");
+pega_json(`${url}masculino`).then((atletas) => {
+    atletas.forEach((atleta) => container.appendChild(montaCard(atleta)));
 });
 
-pega_json(`${url}26`).then((r) => console.log(r));
+// Exemplo de requisição adicional
+pega_json(`${url}26`).then((res) => console.log(res));
 
-console.log("isso imprime primeiro.");
-
-const manipulaBotao = (e) => {
-    const texto = document.getElementById('senha').value;
-    if (hex_md5(texto) ==='8e618839cadb8df56f391402dfb10fe8273c20207a413c5034130be27bb63b7c'){
-        sessionStorage.setItem('logado', 'sim');
+// Função auxiliar de verificação para o botão de autenticação (usando SHA-256)
+const manipulaBotao = () => {
+    const texto = document.getElementById("senha").value;
+    if (hex_sha256(texto) === '8e618839cadb8df56f391402dfb10fe8273c20207a413c5034130be27bb63b7c') {
+        sessionStorage.setItem("logado", "sim");
     } else {
-        alert('Você errou a senha!!!');
+        alert("Você errou a senha!");
     }
-}
+};
 
-document.getElementById('botao').onclick = manipulaBotao;
-
-document.getElementById('logout').onclick = () => sessionStorage.removeItem('logout');
+// Conecta a função de autenticação ao botão
+document.getElementById("botao").onclick = manipulaBotao;
